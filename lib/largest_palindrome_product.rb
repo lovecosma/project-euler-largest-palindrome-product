@@ -1,43 +1,39 @@
-# Implement your procedural solution here!
-
-
 def largest_palindrome_product
 
-    num1 = 999
-    num2 = 999
-    prod = num1 * num2
-    target = findNearestPalindrome(prod)
-    
-    until target % num1 == 0 && !(target / num1 > 1000)
-        num1 -= 1
-        if(num1 < 100)
-            target = findNearestPalindrome(target)
-           num1 = 999
+    factor1 = 999
+    factor2 = 999
+    product = factor1 * factor2
+    target = nextPalindrome(product)
+
+    until target % factor1 == 0 && target / factor1 < 999
+        if(factor1 < 100)
+            factor1 = 999
+            target = nextPalindrome(target)
         end 
+
+        factor1 -= 1
     end 
 
-
-
-
-    return target
+    target
 
 end 
 
-def findNearestPalindrome(num)
+def nextPalindrome(num)
+
     if isPalindrome(num)
         num -= 1
     end 
-    while !isPalindrome(num)
+
+    until isPalindrome(num)
         num -= 1
     end 
-    return num
+    num
 end 
 
 def isPalindrome(num)
-    string_num = num.to_s
-    if(string_num == string_num.reverse)
+    if(num.to_s == num.to_s.reverse)
         true
-  else
+    else
         false
-  end 
+    end 
 end 
